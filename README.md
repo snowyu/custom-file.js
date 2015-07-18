@@ -4,18 +4,24 @@
 [![downloads](https://img.shields.io/npm/dm/abstract-file.svg)](https://npmjs.org/package/abstract-file)
 [![license](https://img.shields.io/npm/l/abstract-file.svg)](https://npmjs.org/package/abstract-file)
 
-The abstract file information classes include AbstractFile and AbstractFolder.
+The abstract file classes include AbstractFile and AbstractFolder.
 
 + LRUCache-able supports
-+ abstract load supports
-  * load stat
-  * load contents
-+ abstract save supports
++ abstract file information class
++ abstract file operation ability
+  + abstract load supports
+    * load stat
+    * load contents
+  + abstract save supports
+  * rename
+  * create
+  * append
+  * delete
 
-The AbstractFile properties:
+The FileInfo properties:
 
-* `cwd` *(File)*: the current working directory. 
-  * it's the `"root"` if `cwd` is null.
+* `cwd` *(String)*: the current working directory. 
+  * it's the `"root"` if `cwd` is ''.
 * `path` *(String)*: the file path. it will be stored as absolute path always.
   * `path` = path.resolve(`cwd`, `path`)
   * internal stored as an array of path.
@@ -38,6 +44,10 @@ The AbstractFile properties:
     * path.relative(path.resovle(cwd, base), path.resolve(cwd, base, path))
     * path.relative(`base`, `path`) if `base` is absolute path
     * path.relative(`cwd`, `path`) if no `base` property
+
+* methods:
+  * resolve(paths...): path.resolve @cwd, paths...
+  * toString(): return the full path.
 
 ## Usage
 

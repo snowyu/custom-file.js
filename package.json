@@ -29,9 +29,10 @@
   ],
   "dependencies": {
     "inherits-ex": "^1.0.7",
-    "path.js": "^1.0.3",
+    "path.js": "^1.0.5",
+    "property-manager": "^0.8.0",
     "readable-stream": "^2.0.1",
-    "util-ex": "^0.3.4"
+    "util-ex": "^0.3.9"
   },
   "devDependencies": {
     "chai": "~1.10.0",
