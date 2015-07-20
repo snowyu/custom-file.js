@@ -1,6 +1,7 @@
 path            = require 'path.js'
 isObject        = require 'util-ex/lib/is/type/object'
 isArray         = require 'util-ex/lib/is/type/array'
+isString        = require 'util-ex/lib/is/type/string'
 isBuffer        = require 'util-ex/lib/is/type/buffer'
 cloneObject     = require 'util-ex/lib/clone-object'
 stream          = require 'stream'
@@ -16,38 +17,25 @@ module.exports =
   base:
     value: ''
     type: 'String'
-    assign: (value)->path.resolve @cwd, value
+    assign: (value, dest, src)->
+      cwd = src.cwd || dest.cwd
+      if cwd
+        value = path.resolve cwd, value
+      value
   path:
-    get: ->
-      if @_pathArray.length
-        PATH_SEP + @_pathArray.join(PATH_SEP)
-      else
-        ''
+    type: 'String'
+    get: ->@_path
     set: (value)->
-      if value and isArray(value._pathArray)
-        @_pathArray = value._pathArray.slice()
-      else if isArray(value)
-        @_pathArray = value.slice()
-      else if isString(value)
-        t = path.resolveArray(@cwd, @base, value)
-        t = t.slice(1) if t[0] is PATH_SEP
-        @_pathArray = t
-      len = @history.length
-      if len
-        --len
-        p = @path
-        @history.push p if p isnt @history[len]
-        
-  pathArray:
-    exported: false
+      if isObject(value) and isString(value.path)
+        value = value.path
+      if isString(value)
+        @_path = value = path.resolve @cwd, @base, value
+        len = @history.length
+        @history.push value if !len or value isnt @history[len-1]
+  _path:
+    type: 'String'
     assigned: false
-    type:'Array'
-    get: -> @_pathArray
-    set: (value)->@_pathArray = value.slice() if isArray value
-  _pathArray:
-    value: []
-    enumerable: false
-    type: 'Array'
+    exported: false
   history:
     value: []
     type: 'Array'
@@ -61,26 +49,19 @@ module.exports =
         src.contents = value.pipe(new PassThrough())
         value = t
       value
+  # the skipped length from beginning of contents.
+  # this could get the contents quickly later.
+  skipSize:
+    type: 'Number'
   relative:
     assigned: false
     exported: false
-    enumerable: false
     get: -> path.relative @base, @path
   dirname:
     assigned: false
     exported: false
-    enumerable: false
-    get: ->
-      if len = @_pathArray.length
-        PATH_SEP + @_pathArray.slice(0, len-1).join(PATH_SEP)
-      else
-        ''
+    get: -> path.dirname @path
   basename:
     assigned: false
     exported: false
-    enumerable: false
-    get: ->
-      if len = @_pathArray.length
-        @_pathArray[len-1]
-      else
-        ''
+    get: -> path.basename @path

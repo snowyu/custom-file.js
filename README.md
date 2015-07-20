@@ -18,9 +18,17 @@ The abstract file classes include AbstractFile and AbstractFolder.
   * append
   * delete
 
+you must set the `fs`(file system) to AbstractFile Before use it:
+
+```js
+var fs = require('fs')
+fs.cwd = process.cwd
+AbstractFile.fs = fs
+```
+
 The FileInfo properties:
 
-* `cwd` *(String)*: the current working directory. 
+* `cwd` *(String)*: the current working directory.
   * it's the `"root"` if `cwd` is ''.
 * `path` *(String)*: the file path. it will be stored as absolute path always.
   * `path` = path.resolve(`cwd`, `path`)
@@ -28,7 +36,7 @@ The FileInfo properties:
   * change path means rename it.
 * `name` *(String)*: the name of the file. = `basename`
   * readonly
-* !`parent` *(File)*: the parent of this file path. 
+* !`parent` *(File)*: the parent of this file path.
   * I can use the dirname to determine the `parent`.
 * !`base` *(String)*: the file base path. should I need this?
   * !the `cwd` will be the file base path if empty
@@ -46,7 +54,6 @@ The FileInfo properties:
     * path.relative(`cwd`, `path`) if no `base` property
 
 * methods:
-  * resolve(paths...): path.resolve @cwd, paths...
   * toString(): return the full path.
 
 ## Usage
