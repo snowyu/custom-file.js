@@ -1,11 +1,11 @@
 {
-  "name": "abstract-file",
-  "description": "the abstract file information class.",
-  "version": "0.0.0",
-  "homepage": "https://github.com/snowyu/abstract-file.js",
+  "name": "custom-file",
+  "description": "It abstracts the File and Folder classes, can be used on any virtual file system, and stream supports.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/snowyu/custom-file.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/snowyu/abstract-file.js.git"
+    "url": "git://github.com/snowyu/custom-file.js.git"
   },
   "main": "lib/",
   "files": [
@@ -76,7 +76,7 @@
     "test"
   ],
   "bugs": {
-    "url": "https://github.com/snowyu/abstract-file.js/issues"
+    "url": "https://github.com/snowyu/custom-file.js/issues"
   },
   "license": "MIT",
   "stability": "unstable"
