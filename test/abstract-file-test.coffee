@@ -7,10 +7,13 @@ assert          = chai.assert
 chai.use(sinonChai)
 
 fs              = require 'fs'
-path            = require 'path.js'
+fs.cwd          = process.cwd
 inherits        = require 'inherits-ex/lib/inherits'
 extend          = require 'util-ex/lib/_extend'
-File            = require '../src/'
+File            = require '../src/abstract-file'
+#console.log Object.getOwnPropertyDescriptor File, 'fs'
+File.fs = fs
+
 setImmediate    = setImmediate || process.nextTick
 
 describe 'AbstractFile', ->
@@ -21,7 +24,7 @@ describe 'AbstractFile', ->
     result.should.have.ownProperty 'history'
     result.history.should.be.deep.equal ['/path/dff/path']
   it 'should assign the options via the order of defined properties', ->
-    result = new File path: 'path', cwd: '/path/dff', base: 'hhah'
+    result = new File path: 'path', base: 'hhah', cwd: '/path/dff'
     result.should.have.property 'path', '/path/dff/hhah/path'
     result.should.have.ownProperty 'history'
     result.history.should.be.deep.equal ['/path/dff/hhah/path']
