@@ -28,14 +28,10 @@
     "klass"
   ],
   "dependencies": {
-    "abstract-file": "^0.1.3",
+    "abstract-file": "^0.1.6",
     "bluebird": "^2.9.34",
     "inherits-ex": "^1.0.9",
-    "path.js": "^1.0.5",
-    "property-manager": "^0.9.0",
     "read-dir-stream": "^0.3.0",
-    "readable-stream": "^2.0.1",
-    "stream-array": "^1.1.0",
     "strip-bom": "^2.0.0",
     "strip-bom-stream": "^1.0.0",
     "util-ex": "^0.3.9"
