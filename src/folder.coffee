@@ -1,22 +1,30 @@
 inherits        = require 'inherits-ex/lib/inherits'
 createObject    = require 'inherits-ex/lib/createObject'
 ReadDirStream   = require 'read-dir-stream'
-AbstractFile    = require './abstract-file'
+Promise         = require 'bluebird'
+AbstractFile    = require 'abstract-file'
 File            = require './file'
 
 module.exports = class Folder
-  fs = AbstractFile.fs
-  path = if fs then fs.path else null
+  fs = null
+  path = null
 
   inherits Folder, File
 
-  constructor: (aPath, aOptions)->
-    return new Folder(aPath, aOptions) unless @ instanceof Folder
+  constructor: (aPath, aOptions, done)->
+    return new Folder(aPath, aOptions, done) unless @ instanceof Folder
+    @_updateFS()
+    super
+
+  _updateFS: ->
     unless fs
       fs = AbstractFile.fs
       throw new TypeError('no file system specified') unless fs
       path = fs.path
-    super
+      fs.stat      = Promise.promisify fs.stat, fs
+      fs.readdir   = Promise.promisify fs.readdir, fs
+      ReadDirStream::_stat = fs.stat
+      ReadDirStream::_readdir = fs.readdir
 
   _validate: (file)->
     file.stat? and file.stat.isDirectory()

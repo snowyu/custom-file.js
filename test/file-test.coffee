@@ -9,10 +9,10 @@ chai.use(sinonChai)
 isFunction      = require 'util-ex/lib/is/type/function'
 setImmediate    = setImmediate || process.nextTick
 
-AbstractFile    = require '../src/abstract-file'
+AbstractFile    = require 'abstract-file'
 File            = require '../src/file'
 
-fileBehaviorTest= require './abstract-file'
+fileBehaviorTest= require 'abstract-file/test'
 loadContentTest = fileBehaviorTest.loadFileContent
 
 
@@ -20,6 +20,7 @@ describe 'File Class', ->
   beforeEach ->
     @File = File
     @canLoadStatAsync = true
+    @cwd = __dirname
     @contentPath = 'fixtures/folder/index.md'
     @loadContentTest = loadContentTest
     @content = '''

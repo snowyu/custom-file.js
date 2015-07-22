@@ -1,19 +1,22 @@
 inherits        = require 'inherits-ex/lib/inherits'
 stripBom        = require 'strip-bom'
 stripBomStream  = require 'strip-bom-stream'
-AbstractFile    = require './abstract-file'
+AbstractFile    = require 'abstract-file'
 
 module.exports  = class File
   fs = AbstractFile.fs
 
   inherits File, AbstractFile
 
-  constructor: (aPath, aOptions)->
+  constructor: (aPath, aOptions, done)->
+    return new File(aPath, aOptions, done) unless @ instanceof File
+    @_updateFS()
+    super
+
+  _updateFS: ->
     unless fs
       fs = AbstractFile.fs
       throw new TypeError('no file system specified') unless fs
-    return new File(aPath, aOptions) unless @ instanceof File
-    super
 
   _validate: (file)->
     file.stat? and not file.stat.isDirectory()

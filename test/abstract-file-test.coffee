@@ -10,7 +10,7 @@ fs              = require 'fs'
 fs.cwd          = process.cwd
 inherits        = require 'inherits-ex/lib/inherits'
 extend          = require 'util-ex/lib/_extend'
-File            = require '../src/abstract-file'
+File            = require 'abstract-file'
 #console.log Object.getOwnPropertyDescriptor File, 'fs'
 File.fs = fs
 

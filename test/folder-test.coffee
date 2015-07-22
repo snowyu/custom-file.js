@@ -7,16 +7,17 @@ assert          = chai.assert
 chai.use(sinonChai)
 
 fs              = require 'fs'
-AbstractFile    = require '../src/abstract-file'
+AbstractFile    = require 'abstract-file'
 Folder          = require '../src/folder'
 path            = fs.path
 
-fileBehaviorTest = require './abstract-file'
+fileBehaviorTest = require 'abstract-file/test'
 loadContentTest = fileBehaviorTest.loadFolderContent
 
 describe 'Folder Class', ->
   beforeEach ->
     @File = Folder
+    @cwd = __dirname
     @canLoadStatAsync = true
     @contentPath = 'fixtures/folder/'
     @loadContentTest = loadContentTest
