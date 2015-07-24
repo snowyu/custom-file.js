@@ -9,7 +9,7 @@ the custom-file can be used on any virtual file system with stream supports.
 
 ## Usage
 
-you must set the `fs`(file system) to AbstractFile Before use it:
+you must call `setFileSystem()` the `fs` to CustomFile Before use it:
 
 ```coffee
 through2    = require 'through2'
