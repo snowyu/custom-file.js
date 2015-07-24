@@ -28,7 +28,7 @@
     "klass"
   ],
   "dependencies": {
-    "abstract-file": "^0.1.6",
+    "abstract-file": "^0.1.8",
     "bluebird": "^2.9.34",
     "inherits-ex": "^1.0.9",
     "read-dir-stream": "^0.3.0",
