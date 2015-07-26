@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "chai": "~1.10.0",
+    "coffee-coverage": "^0.6.2",
     "grunt": "~0.4.5",
     "grunt-contrib-clean": "~0.6.0",
     "grunt-contrib-coffee": "~0.12.0",
@@ -46,6 +47,7 @@
     "grunt-mocha-test": "~0.12.6",
     "grunt-newer": "~0.8.0",
     "grunt-release": "~0.9.0",
+    "istanbul": "^0.3.17",
     "mocha": "~2.1.0",
     "pre-commit": "~1.0.2",
     "rimraf": "~2.2.8",
