@@ -48,6 +48,12 @@ describe 'AdvanceFile Class Folder test', ->
 
   fileBehaviorTest()
 
+  it 'should update fs on new object', ->
+    AbstractFile.fs = null
+    File './README.md', fs: fs
+    should.exist AbstractFile.fs
+    AbstractFile.fs.should.be.equal fs
+
 describe 'AdvanceFile#inspect()', ->
   it 'should show "<File?>" if no file stat', ->
     result = File './README.md'
