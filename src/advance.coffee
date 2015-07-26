@@ -13,20 +13,28 @@ module.exports = class AdvanceFile
 
   constructor: (aPath, aOptions, done)->
     return new AdvanceFile(aPath, aOptions, done) unless @ instanceof AdvanceFile
-    @_updateFS()
+    vFS = aOptions.fs if aOptions
     super
 
-  _updateFS: ->
+  _updateFS: (aFS)->
     unless fs
+      AbstractFile.fs = aFS unless AbstractFile.fs
       fs = AbstractFile.fs
-      throw new TypeError('no file system specified') unless fs
       path = fs.path
       fs.stat      = Promise.promisify fs.stat, fs
       fs.readdir   = Promise.promisify fs.readdir, fs
       ReadDirStream::_stat = fs.stat
       ReadDirStream::_readdir = fs.readdir
+    super aFS
 
   _validate: (file)->file.stat?
+  inspect: ->
+    name = 'File'
+    if @stat
+      name = 'Folder' if @stat.isDirectory()
+    else
+      name += '?'
+    '<'+ name + ' ' + @_inspect() + '>'
 
   createFileObj: (options)->
     stat = options.stat

@@ -48,3 +48,13 @@ describe 'AdvanceFile Class Folder test', ->
 
   fileBehaviorTest()
 
+describe 'AdvanceFile#inspect()', ->
+  it 'should show "<File?>" if no file stat', ->
+    result = File './README.md'
+    result.inspect().should.be.equal '<File? "README.md">'
+  it 'should show "<File>" if it\'s a file', ->
+    result = File './README.md', load:true
+    result.inspect().should.be.equal '<File "README.md">'
+  it 'should show "<Folder>" if it\'s a direcory', ->
+    result = File './', load:true
+    result.inspect().should.be.equal '<Folder ".">'
