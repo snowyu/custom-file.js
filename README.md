@@ -1,6 +1,8 @@
 ## custom-file [![npm](https://img.shields.io/npm/v/custom-file.svg)](https://npmjs.org/package/custom-file)
 
 [![Build Status](https://img.shields.io/travis/snowyu/custom-file.js/master.svg)](http://travis-ci.org/snowyu/custom-file.js)
+[![Code Climate](https://codeclimate.com/github/snowyu/custom-file.js/badges/gpa.svg)](https://codeclimate.com/github/snowyu/custom-file.js)
+[![Test Coverage](https://codeclimate.com/github/snowyu/custom-file.js/badges/coverage.svg)](https://codeclimate.com/github/snowyu/custom-file.js/coverage)
 [![downloads](https://img.shields.io/npm/dm/custom-file.svg)](https://npmjs.org/package/custom-file)
 [![license](https://img.shields.io/npm/l/custom-file.svg)](https://npmjs.org/package/custom-file)
 
