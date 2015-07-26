@@ -37,7 +37,15 @@ file.pipe through2.obj (aFile, enc, next)->next null, aFile.inspect()+'\n'
 .pipe process.stdout, end:false
 
 file = CustomFile './readme.md' # the CustomFile can create the file or folder object base on the file path
-file = CustomFile './'
+file.should.be.instanceof File
+file = CustomFile './'          # Or use the AdvanceFile with same object.
+file.should.be.instanceof Folder
+
+AdvanceFile = require 'custom-file/lib/advance'
+file = AdvanceFile './readme.md'
+file.should.be.instanceof AdvanceFile
+file = AdvanceFile './'
+file.should.be.instanceof AdvanceFile
 
 file.loadSync read:true # here can load manually.
 file.load read:true, (err, content)->
@@ -100,7 +108,15 @@ file.pipe(through2.obj(function(aFile, enc, next) {
 });
 
 file = CustomFile('./readme.md'); // create a file object.
+file.should.be.instanceof(File)
 file = CustomFile('./'); // create a folder object.
+file.should.be.instanceof(Folder)
+
+var AdvanceFile = require('custom-file/lib/advance')
+file = AdvanceFile('./readme.md')
+file.should.be.instanceof(AdvanceFile)
+file = AdvanceFile('./')
+file.should.be.instanceof(AdvanceFile)
 
 file.loadSync({read: true});
 file.load({read: true}, function(err, content) {
