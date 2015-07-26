@@ -13,13 +13,12 @@ module.exports = class Folder
 
   constructor: (aPath, aOptions, done)->
     return new Folder(aPath, aOptions, done) unless @ instanceof Folder
-    vFS = aOptions.fs if aOptions
     super
 
   _updateFS: (aFS)->
-    unless fs
-      AbstractFile.fs = aFS unless AbstractFile.fs
-      fs = AbstractFile.fs
+    unless fs and AbstractFile.fs
+      aFS = AbstractFile.fs unless aFS
+      fs = aFS
       path = fs.path
       fs.stat      = Promise.promisify fs.stat, fs
       fs.readdir   = Promise.promisify fs.readdir, fs

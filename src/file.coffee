@@ -15,9 +15,10 @@ module.exports  = class File
     super
 
   _updateFS: (aFS)->
-    unless fs
-      AbstractFile.fs = aFS unless AbstractFile.fs
+    unless fs and AbstractFile.fs
+      AbstractFile.fs = aFS
       fs = AbstractFile.fs
+      ### !pragma coverage-skip-next ###
       throw new TypeError('no file system specified') unless fs
 
   _validate: (file)->

@@ -9,7 +9,7 @@ Folder          = require './folder'
 
 module.exports  = class CustomFile
   constructor: (aPath, aOptions, done)->
-    throw new TypeError('no file system specified') unless AbstractFile.fs
+    #throw new TypeError('no file system specified') unless AbstractFile.fs
     if isObject aPath
       done = aOptions if aOptions
       aOptions = aPath

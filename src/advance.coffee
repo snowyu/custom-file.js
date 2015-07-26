@@ -13,19 +13,18 @@ module.exports = class AdvanceFile
 
   constructor: (aPath, aOptions, done)->
     return new AdvanceFile(aPath, aOptions, done) unless @ instanceof AdvanceFile
-    vFS = aOptions.fs if aOptions
     super
 
   _updateFS: (aFS)->
-    unless fs
-      AbstractFile.fs = aFS unless AbstractFile.fs
-      fs = AbstractFile.fs
-      path = fs.path
+    unless fs and AbstractFile.fs
+      aFS = AbstractFile.fs unless aFS
+      fs = aFS
       fs.stat      = Promise.promisify fs.stat, fs
       fs.readdir   = Promise.promisify fs.readdir, fs
       ReadDirStream::_stat = fs.stat
       ReadDirStream::_readdir = fs.readdir
     super aFS
+    path = fs.path unless path
 
   _validate: (file)->file.stat?
   inspect: ->
