@@ -42,7 +42,7 @@ module.exports = class AdvanceFile
     createObject AbstractFile, options
 
   _getDirStreamSync: (aFile)->
-      ReadDirStream aFile.path, makeObjFn: =>@createFileObj.apply(@, arguments)
+    ReadDirStream aFile.path, makeObjFn: =>@createFileObj.apply(@, arguments)
   _getDirStream: (aFile, cb)->
     result = ReadDirStream aFile.path, makeObjFn: =>
       @createFileObj.apply(@, arguments)
