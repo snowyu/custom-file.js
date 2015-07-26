@@ -10,11 +10,13 @@ module.exports  = class File
 
   constructor: (aPath, aOptions, done)->
     return new File(aPath, aOptions, done) unless @ instanceof File
-    @_updateFS()
+    vFS = aOptions.fs if aOptions
+    @_updateFS(vFS)
     super
 
-  _updateFS: ->
+  _updateFS: (aFS)->
     unless fs
+      AbstractFile.fs = aFS unless AbstractFile.fs
       fs = AbstractFile.fs
       throw new TypeError('no file system specified') unless fs
 

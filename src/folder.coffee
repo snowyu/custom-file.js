@@ -13,18 +13,19 @@ module.exports = class Folder
 
   constructor: (aPath, aOptions, done)->
     return new Folder(aPath, aOptions, done) unless @ instanceof Folder
-    @_updateFS()
+    vFS = aOptions.fs if aOptions
     super
 
-  _updateFS: ->
+  _updateFS: (aFS)->
     unless fs
+      AbstractFile.fs = aFS unless AbstractFile.fs
       fs = AbstractFile.fs
-      throw new TypeError('no file system specified') unless fs
       path = fs.path
       fs.stat      = Promise.promisify fs.stat, fs
       fs.readdir   = Promise.promisify fs.readdir, fs
       ReadDirStream::_stat = fs.stat
       ReadDirStream::_readdir = fs.readdir
+    super aFS
 
   _validate: (file)->
     file.stat? and file.stat.isDirectory()
