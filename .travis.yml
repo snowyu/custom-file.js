@@ -12,7 +12,14 @@ before_install:
   - npm install -g grunt-cli
   - npm install coffee-script
 before_script: grunt build
+script: npm run-script test-cov
+after_success:
+  - test -e ./coverage/lcov.info && npm install codeclimate-test-reporter && codeclimate-test-reporter
+    < ./coverage/lcov.info
 notifications:
   email:
     - snowyu.lee@gmail.com
-
+addons:
+  code_climate:
+    repo_token:
+      secure: "rhPdPHqaY4mmKiVyGIzhcX8N/uY9riY26Fq0YcQKWX9oF0NLh6xPywEMx+MxLpNLmVHwuBtRStWLtiIAbacGAtv+utOqCl6xO0Z/frfZNBxEx9p5nsLQBJBQNXHY3QgLvj5IpI3MmbjGwGiv+S40CD01QDvJ94XiTzfmKkzsrfFNRSb1Ki3Xo0TYCepkf77Rm+oAD/htHOOOdpOza69Gdud5lWyyjv74fZk37jAjcMDWoyeF3pJKm4wDXzCnQsqyp7Rus8IAq5Hq2l4wWTv+6HJu/f0yrzvvA585DTkqizTcDfiQuz6t0holm5ot0joxakDxdqOK3dXYbmBPAFmcDsI9doyCmrkhrZCJoTZjXrpP+Upc8K1KX1HPTj9tEXMefApRmhR/e9eGKLPcRX3XJam3aYVTAyo6+WG4ncLsVC+3lsCrAucpbxD2fHdmmEiNcEqV+uf/OIq8BU7h/PByE8odjXmC6pZw7WkSM/ejlu10fpoMXPAtdQ7yNoq9cUAI8nsVfxVQj1RTaYvbZlYWXppHNsSpkYp9YcV5v7lM5k3lsmmN9v+zvKj7176WldWF1rNj5tkT8Ja0BatKkCouj4V8C4lzh9eT0rCWfMtQIgoENmGVVYArWD90A9/kkAGlz9xDH0Vib61Ivqnt5FWV5eSd3j9ow3C5+w36yUiHcWs="

@@ -54,7 +54,8 @@
     "sinon-chai": "~2.6.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "test-cov": "mocha --reporter dot && istanbul report text-summary lcovonly"
   },
   "contributors": [
     {
