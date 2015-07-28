@@ -51,6 +51,7 @@ module.exports  = class File
   _getBufferSync: (file)->
     data = fs.readFileSync file.path, file
     data = stripBom(data)
+    data = if file.text then data.toString() else data
     #data = data.slice(file.skipSize) if isNumber file.skipSize
   _getStream: (file, done)->
     result = fs.createReadStream(file.path, file).pipe(stripBomStream())
@@ -60,5 +61,8 @@ module.exports  = class File
     fs.readFile file.path, file, (err, data) ->
       unless err
         data = stripBom(data)
+        data = data.toString() if file.text
         #data = data.slice(file.skipSize) if isNumber file.skipSize
       done err, data
+      return
+    @
