@@ -67,28 +67,28 @@ module.exports = class AdvanceFile
 
   _getStreamSync: (aFile)->
     stat = aFile.stat
-    stat = @_loadStatSync(aFile) unless stat
+    stat = aFile.stat = @_loadStatSync(aFile) unless stat
     if stat.isDirectory()
       @_getDirStreamSync(aFile)
     else
       super aFile
   _getStream: (aFile, cb)->
     stat = aFile.stat
-    stat = @_loadStatSync(aFile) unless stat
+    stat = aFile.stat = @_loadStatSync(aFile) unless stat
     if stat.isDirectory()
       @_getDirStream aFile, cb
     else
       super aFile, cb
   _getBufferSync: (aFile)-> # return the array of files
     stat = aFile.stat
-    stat = @_loadStatSync(aFile) unless stat
+    stat = aFile.stat = @_loadStatSync(aFile) unless stat
     if stat.isDirectory()
       @_getDirBufferSync aFile
     else
       super aFile
   _getBuffer: (aFile, cb)-> # return the array of files
     stat = aFile.stat
-    stat = @_loadStatSync(aFile) unless stat
+    stat = aFile.stat = @_loadStatSync(aFile) unless stat
     if stat.isDirectory()
       @_getDirBuffer aFile, cb
     else
