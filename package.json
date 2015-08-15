@@ -1,7 +1,7 @@
 {
   "name": "custom-file",
   "description": "It abstracts the File and Folder classes, can be used on any virtual file system, and stream supports.",
-  "version": "0.3.5",
+  "version": "0.4.0",
   "homepage": "https://github.com/snowyu/custom-file.js",
   "repository": {
     "type": "git",
