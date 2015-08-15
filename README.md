@@ -132,6 +132,13 @@ file.load({read: true}, function(err, content) {
 See the [abstract-file](https://github.com/snowyu/abstract-file.js).
 
 
+## Changes
+
+### v0.4
+
++ abstract-folder class.
+
+
 ## TODOs
 
 + LRUCache-able supports(not yet)
