@@ -24,7 +24,7 @@ module.exports  = class File
       throw new TypeError('no file system specified') unless fs
 
   _validate: (file)->
-    file.stat? and not file.stat.isDirectory()
+    file.hasOwnProperty('stat') and file.stat? and not file.stat.isDirectory()
 
   _loadStat: (aOptions, done)->
     fs.stat aOptions.path, (err, result)=>

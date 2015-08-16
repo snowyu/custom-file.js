@@ -15,7 +15,7 @@ module.exports = class Folder
   @defineProperties: AbstractFolder.defineProperties
 
   _validate: (file)->
-    file.stat? and file.stat.isDirectory()
+    file.hasOwnProperty('stat') and file.stat? and file.stat.isDirectory()
 
   createFileObject: (options)->
     stat = options.stat

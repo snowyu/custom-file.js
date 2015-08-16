@@ -13,11 +13,11 @@ module.exports = class AdvanceFile
 
   @defineProperties: AbstractFolder.defineProperties
 
-  _validate: (file)->file.stat?
+  _validate: (file)-> file.hasOwnProperty('stat') and file.stat?
 
   inspect: ->
     name = 'File'
-    if @stat
+    if @_validate(@)
       name = 'Folder' if @stat.isDirectory()
     else
       name += '?'
