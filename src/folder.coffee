@@ -12,6 +12,8 @@ module.exports = class Folder
     return new Folder(aPath, aOptions, done) unless @ instanceof Folder
     super
 
+  @defineProperties: AbstractFolder.defineProperties
+
   _validate: (file)->
     file.stat? and file.stat.isDirectory()
 

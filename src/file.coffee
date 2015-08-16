@@ -14,6 +14,8 @@ module.exports  = class File
     @_updateFS(vFS)
     super
 
+  @defineProperties: AbstractFile.defineProperties
+
   _updateFS: (aFS)->
     unless fs and AbstractFile.fs
       AbstractFile.fs = aFS

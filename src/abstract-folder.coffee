@@ -11,6 +11,8 @@ module.exports = class AbstractFolder
 
   inherits AbstractFolder, File
 
+  @defineProperties: File.defineProperties
+
   constructor: (aPath, aOptions, done)->
     return new AbstractFolder(aPath, aOptions, done) unless @ instanceof AbstractFolder
     super

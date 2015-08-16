@@ -11,6 +11,8 @@ module.exports = class AdvanceFile
     return new AdvanceFile(aPath, aOptions, done) unless @ instanceof AdvanceFile
     super
 
+  @defineProperties: AbstractFolder.defineProperties
+
   _validate: (file)->file.stat?
 
   inspect: ->
