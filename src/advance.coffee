@@ -18,7 +18,7 @@ module.exports = class AdvanceFile
   inspect: ->
     name = 'File'
     if @_validate(@)
-      name = 'Folder' if @stat.isDirectory()
+      name = 'Folder' if @isDirectory()
     else
       name += '?'
     '<'+ name + ' ' + @_inspect() + '>'
