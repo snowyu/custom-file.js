@@ -134,6 +134,10 @@ See the [abstract-file](https://github.com/snowyu/abstract-file.js).
 
 ## Changes
 
+### v0.5
+
++ [AbstractFolder] add the filter property to filter the files.
+
 ### v0.4
 
 + abstract-folder class.
