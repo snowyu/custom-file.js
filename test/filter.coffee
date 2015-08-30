@@ -9,19 +9,20 @@ chai.use(sinonChai)
 fs              = require 'fs'
 path            = fs.path
 
-module.exports = (Folder)->
+module.exports = (Folder, filterFn, expected)->
   ->
-    filterFn = (file)->path.extname(file.path) is '.md'
+    filterFn ?= (file)->path.extname(file.path) is '.md'
+    expected ?= ['fixtures/folder/index.md']
     it 'should filter files sync default', ->
       dir = Folder path.join(__dirname, 'fixtures', 'folder'), base: __dirname, filter: filterFn
       result = dir.loadSync read:true
       result = result.map (file)->file.relative
-      expect(result).be.deep.equal ['fixtures/folder/index.md']
+      expect(result).be.deep.equal expected
     it 'should filter files sync buffer', ->
       dir = Folder path.join(__dirname, 'fixtures', 'folder'), base: __dirname
       result = dir.loadSync read:true, filter: filterFn
       result = result.map (file)->file.relative
-      expect(result).be.deep.equal ['fixtures/folder/index.md']
+      expect(result).be.deep.equal expected
     it 'should filter files sync stream', (done)->
       dir = Folder path.join(__dirname, 'fixtures', 'folder'), base: __dirname
       result = []
@@ -30,7 +31,7 @@ module.exports = (Folder)->
         result.push file.relative
       .on 'error', (err)->done(err)
       .on 'end', ->
-        expect(result).be.deep.equal ['fixtures/folder/index.md']
+        expect(result).be.deep.equal expected
         done()
 
     it 'should filter files async default', (done)->
@@ -38,14 +39,14 @@ module.exports = (Folder)->
       dir.load read:true, (err, result)->
         unless err
           result = result.map (file)->file.relative
-          expect(result).be.deep.equal ['fixtures/folder/index.md']
+          expect(result).be.deep.equal expected
         done(err)
     it 'should filter files async buffer', (done)->
       dir = Folder path.join(__dirname, 'fixtures', 'folder'), base: __dirname
       dir.load read:true, filter: filterFn, (err, result)->
         unless err
           result = result.map (file)->file.relative
-          expect(result).be.deep.equal ['fixtures/folder/index.md']
+          expect(result).be.deep.equal expected
         done(err)
     it 'should filter files async stream', (done)->
       dir = Folder path.join(__dirname, 'fixtures', 'folder'), base: __dirname
@@ -56,5 +57,5 @@ module.exports = (Folder)->
           result.push file.relative
         .on 'error', (err)->done(err)
         .on 'end', ->
-          expect(result).be.deep.equal ['fixtures/folder/index.md']
+          expect(result).be.deep.equal expected
           done()
