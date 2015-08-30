@@ -17,10 +17,10 @@ module.exports = class Folder
   _validate: (file)->
     file.hasOwnProperty('stat') and file.stat? and file.stat.isDirectory()
 
-  createFileObject: (options)->
+  createFileObject: (options, aFilter)->
     stat = options.stat
     vClass = if stat and stat.isDirectory() then Folder else File
-    @_createFileObject vClass, options
+    @_createFileObject vClass, options, aFilter
 
   _getStreamSync: (aFile)->
     @_getDirStreamSync(aFile)

@@ -12,6 +12,7 @@ File            = require '../src/advance'
 path            = fs.path
 
 fileBehaviorTest = require 'abstract-file/test'
+filterBehaviorTest = require './filter'
 
 describe 'AdvanceFile Class File test', ->
   beforeEach ->
@@ -64,3 +65,5 @@ describe 'AdvanceFile#inspect()', ->
   it 'should show "<Folder>" if it\'s a direcory', ->
     result = File './', load:true
     result.inspect().should.be.equal '<Folder ".">'
+
+describe 'filter', filterBehaviorTest(File)

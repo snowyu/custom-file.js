@@ -12,6 +12,7 @@ Folder          = require '../src/folder'
 path            = fs.path
 
 fileBehaviorTest = require 'abstract-file/test'
+filterBehaviorTest = require './filter'
 loadContentTest = fileBehaviorTest.loadFolderContent
 
 describe 'Folder Class', ->
@@ -36,3 +37,5 @@ describe 'Folder Class', ->
     cfg = read:true
     #dir.loadSync(cfg)
     #console.log JSON.stringify(dir,null,1)
+
+  describe 'filter', filterBehaviorTest(Folder)
