@@ -37,7 +37,7 @@ module.exports = class AbstractFolder
     aOptions.cwd = @cwd # for ReadDirStream
     aOptions.base = @base
     aFilter ?= @filter
-    if not isFunction(aFilter) or aFilter(aOptions)
+    if not isFunction(aFilter) or aFilter.call(@, aOptions)
       result = createObject aClass, aOptions
     result
 
