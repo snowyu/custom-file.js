@@ -22,8 +22,8 @@ module.exports = class AbstractFolder
     return new AbstractFolder(aPath, aOptions, done) unless @ instanceof AbstractFolder
     super
 
-  _updateFS: (aFS)->
-    unless fs and AbstractFile.fs
+  _updateFS: (aFS)-> #TODO: remove the ugly _updateFS.
+    if fs != AbstractFile.fs or !fs
       aFS = AbstractFile.fs unless aFS
       fs = aFS
       fs.stat      = Promise.promisify fs.stat, fs

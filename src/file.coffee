@@ -16,9 +16,9 @@ module.exports  = class File
 
   @defineProperties: AbstractFile.defineProperties
 
-  _updateFS: (aFS)->
-    unless fs and AbstractFile.fs
-      AbstractFile.fs = aFS
+  _updateFS: (aFS)-> #TODO: remove the ugly _updateFS.
+    if fs != AbstractFile.fs or !fs
+      AbstractFile.fs = aFS if aFS
       fs = AbstractFile.fs
       ### !pragma coverage-skip-next ###
       throw new TypeError('no file system specified') unless fs

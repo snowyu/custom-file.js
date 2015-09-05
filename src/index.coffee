@@ -5,6 +5,7 @@ extend          = require 'util-ex/lib/_extend'
 
 AbstractFile    = require 'abstract-file'
 File            = require './file'
+AbstractFolder  = require './abstract-folder'
 Folder          = require './folder'
 
 module.exports  = class CustomFile
@@ -35,6 +36,7 @@ module.exports  = class CustomFile
 
   @setFileSystem: (value)->
     AbstractFile.fs = value
+    AbstractFolder::_updateFS()
     CustomFile
   @File: File
   @Folder: Folder
