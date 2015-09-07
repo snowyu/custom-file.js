@@ -25,15 +25,15 @@ CustomFile.setFileSystem(fs) # and should set your filesystem first.
 File = CustomFile.File
 Folder = CustomFile.Folder
 
-file = File './readme.md', load:true, read:true, buffer:true
-console.log file.contents #<Buffer 23...>
 file = File './readme.md', load:true, read:true
+console.log file.contents #<Buffer 23...>
+file = File './readme.md', load:true, read:true, buffer:false
 console.log file.contents instanceof Stream #true
 file.pipe process.stdout, end:false #pipe to stdout(the stdout should be never closed.)
 
-file = Folder './', load:true, read:true, buffer:true
-console.log file.contents #[<File "README.md">, <Folder "src">,...]
 file = Folder './', load:true, read:true
+console.log file.contents #[<File "README.md">, <Folder "src">,...]
+file = Folder './', load:true, read:true, buffer:false
 console.log file.contents instanceof Stream #true
 file.pipe through2.obj (aFile, enc, next)->next null, aFile.inspect()+'\n'
 .pipe process.stdout, end:false
@@ -71,15 +71,15 @@ var Folder = CustomFile.Folder;
 
 var file = File('./readme.md', {
   load: true,
-  read: true,
-  buffer: true
+  read: true
 });
 
 console.log(file.contents);
 
 file = File('./readme.md', {
   load: true,
-  read: true
+  read: true,
+  buffer: false
 });
 
 console.log(file.contents instanceof Stream);
@@ -90,15 +90,15 @@ file.pipe(process.stdout, {
 
 file = Folder('./', {
   load: true,
-  read: true,
-  buffer: true
+  read: true
 });
 
 console.log(file.contents);
 
 file = Folder('./', {
   load: true,
-  read: true
+  read: true,
+  buffer: false
 });
 
 console.log(file.contents instanceof Stream);
