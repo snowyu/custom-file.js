@@ -20,6 +20,7 @@ fs          = require 'graceful-fs' #or require 'fs'
 CustomFile  = require 'custom-file'
 
 fs.cwd      = process.cwd    # what's the get current working directory function.
+fs.path     = require 'path.js' # what's the path package. (>=abstract-file@0.5.4 supports)
 CustomFile.setFileSystem(fs) # and should set your filesystem first.
 
 File = CustomFile.File
