@@ -7,6 +7,7 @@ assert          = chai.assert
 chai.use(sinonChai)
 
 fs              = require 'fs'
+fs.path         = require('path.js')
 AbstractFile    = require 'abstract-file'
 File            = require '../src/advance'
 path            = fs.path
@@ -30,24 +31,24 @@ describe 'AdvanceFile Class File test', ->
     '''
 
 
-  fileBehaviorTest()
+  fileBehaviorTest(fs)
 
 describe 'AdvanceFile Class Folder test', ->
   beforeEach ->
     @File = File
     @cwd = __dirname
     @canLoadStatAsync = true
-    @contentPath = 'fixtures/folder/'
+    @contentPath = path.join 'fixtures', 'folder'
     @loadContentTest = fileBehaviorTest.loadFolderContent
     @content = [
-      'fixtures/folder/.ignore'
-      'fixtures/folder/index.md'
-      'fixtures/folder/my.cofffee'
-      'fixtures/folder/subfolder1'
-      'fixtures/folder/subfolder2'
+      path.join 'fixtures', 'folder', '.ignore'
+      path.join 'fixtures', 'folder', 'index.md'
+      path.join 'fixtures', 'folder', 'my.cofffee'
+      path.join 'fixtures', 'folder', 'subfolder1'
+      path.join 'fixtures', 'folder', 'subfolder2'
     ]
 
-  fileBehaviorTest()
+  fileBehaviorTest(fs)
 
   it 'should update fs on new object', ->
     AbstractFile.fs = null
@@ -57,13 +58,13 @@ describe 'AdvanceFile Class Folder test', ->
 
 describe 'AdvanceFile#inspect()', ->
   it 'should show "<File?>" if no file stat', ->
-    result = File './README.md'
+    result = File 'README.md'
     result.inspect().should.be.equal '<File? "README.md">'
   it 'should show "<File>" if it\'s a file', ->
-    result = File './README.md', load:true
+    result = File 'README.md', load:true
     result.inspect().should.be.equal '<File "README.md">'
   it 'should show "<Folder>" if it\'s a direcory', ->
-    result = File './', load:true
+    result = File '.', load:true
     result.inspect().should.be.equal '<Folder ".">'
 
 describe 'filter', filterBehaviorTest(File)

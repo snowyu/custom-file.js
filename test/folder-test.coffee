@@ -9,6 +9,7 @@ chai.use(sinonChai)
 fs              = require 'fs'
 AbstractFile    = require 'abstract-file'
 Folder          = require '../src/folder'
+fs.path         = require('path.js')
 path            = fs.path
 
 fileBehaviorTest = require 'abstract-file/test'
@@ -20,17 +21,17 @@ describe 'Folder Class', ->
     @File = Folder
     @cwd = __dirname
     @canLoadStatAsync = true
-    @contentPath = 'fixtures/folder/'
+    @contentPath = path.join 'fixtures', 'folder'
     @loadContentTest = loadContentTest
     @content = [
-      'fixtures/folder/.ignore'
-      'fixtures/folder/index.md'
-      'fixtures/folder/my.cofffee'
-      'fixtures/folder/subfolder1'
-      'fixtures/folder/subfolder2'
+      path.join 'fixtures', 'folder', '.ignore'
+      path.join 'fixtures', 'folder', 'index.md'
+      path.join 'fixtures', 'folder', 'my.cofffee'
+      path.join 'fixtures', 'folder', 'subfolder1'
+      path.join 'fixtures', 'folder', 'subfolder2'
     ]
 
-  fileBehaviorTest()
+  fileBehaviorTest(fs)
 
   it 'should create a folder object via constructor function directly', ->
     dir = Folder(path.join __dirname, 'fixtures', 'folder')

@@ -8,13 +8,14 @@ chai.use(sinonChai)
 
 fs              = require 'fs'
 extend          = require 'util-ex/lib/_extend'
+fs.path         = require('path.js')
 path            = fs.path
 
 module.exports = (Folder, aOptions, filterFn, expected)->
   ->
     aOptions ?= path:path.join(__dirname, 'fixtures', 'folder'), base: __dirname
     filterFn ?= (file)->path.extname(file.path) is '.md'
-    expected ?= ['fixtures/folder/index.md']
+    expected ?= [path.join('fixtures', 'folder', 'index.md')]
     filterFn = sinon.spy filterFn
     beforeEach ->filterFn.reset()
     expectFilterFnCalledOn = (aThis)->

@@ -9,6 +9,7 @@ chai.use(sinonChai)
 Stream          = require('stream').Stream
 fs              = require 'fs'
 fs.cwd          = process.cwd
+fs.path         = require('path.js')
 inherits        = require 'inherits-ex/lib/inherits'
 extend          = require 'util-ex/lib/_extend'
 File            = require '../src'

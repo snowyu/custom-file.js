@@ -9,6 +9,9 @@ chai.use(sinonChai)
 isFunction      = require 'util-ex/lib/is/type/function'
 setImmediate    = setImmediate || process.nextTick
 
+
+fs              = require 'fs'
+fs.path         = require('path.js')
 AbstractFile    = require 'abstract-file'
 File            = require '../src/file'
 
@@ -21,7 +24,7 @@ describe 'File Class', ->
     @File = File
     @canLoadStatAsync = true
     @cwd = __dirname
-    @contentPath = 'fixtures/folder/index.md'
+    @contentPath = fs.path.join 'fixtures', 'folder', 'index.md'
     @loadContentTest = loadContentTest
     @content = '''
     ---
@@ -32,4 +35,4 @@ describe 'File Class', ->
     '''
 
 
-  fileBehaviorTest()
+  fileBehaviorTest(fs)
