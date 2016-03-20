@@ -26,8 +26,8 @@ module.exports = class AbstractFolder
     if fs != AbstractFile.fs or !fs
       aFS = AbstractFile.fs unless aFS
       fs = aFS
-      fs.stat      = Promise.promisify fs.stat, fs
-      fs.readdir   = Promise.promisify fs.readdir, fs
+      fs.stat      = Promise.promisify fs.stat, context: fs
+      fs.readdir   = Promise.promisify fs.readdir, context: fs
       ReadDirStream::_stat = fs.stat
       ReadDirStream::_readdir = fs.readdir
     super aFS
